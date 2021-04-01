@@ -4,10 +4,10 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "peatio/dogecoin/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "peatio-dogecoin"
+  spec.name          = "peatio-dogecoin-gonzo"
   spec.version       = Peatio::Dogecoin::VERSION
-  spec.authors       = ["Yaroslav S."]
-  spec.email         = ["ysavchuk@heliostech.fr"]
+  spec.authors       = ["Shane Wilson"]
+  spec.email         = ["therealcryptocoin@gmail.com"]
 
   spec.summary       = %q{Gem for extending Peatio plugable system with Dogecoin implementation.}
   spec.description   = %q{Dogecoin Peatio gem which implements Peatio::Blockchain::Abstract & Peatio::Wallet::Abstract.}
