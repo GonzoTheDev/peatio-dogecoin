@@ -1,9 +1,12 @@
-
-module Dogecoin
+module Peatio
+  module Dogecoin
     class Wallet < Peatio::Wallet::Abstract
 
-      def initialize(settings = {})
-        @settings = settings
+      DEFAULT_FEATURES = { skip_deposit_collection: false }.freeze
+
+      def initialize(custom_features = {})
+        @features = DEFAULT_FEATURES.merge(custom_features).slice(*SUPPORTED_FEATURES)
+        @settings = {}
       end
 
       def configure(settings = {})
@@ -28,11 +31,14 @@ module Dogecoin
       end
 
       def create_transaction!(transaction, options = {})
-        txid = client.json_rpc_for_withdrawal(:sendtoaddress,
-                                              transaction.to_address,
-                                              transaction.amount,
-        # options  # subtract fee from transaction amount.
-                                              )
+        txid = client.json_rpc(:sendtoaddress,
+                               [
+                                 transaction.to_address,
+                                 transaction.amount,
+                                 '',
+                                 '',
+                                 options[:subtract_fee].to_s == 'true' # subtract fee from transaction amount.
+                               ])
         transaction.hash = txid
         transaction
       rescue Dogecoin::Client::Error => e
@@ -54,4 +60,4 @@ module Dogecoin
       end
     end
   end
-
+end

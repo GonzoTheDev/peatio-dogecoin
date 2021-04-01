@@ -1,5 +1,6 @@
 
-module Dogecoin
+module Peatio
+  module Dogecoin
     # TODO: Processing of unconfirmed transactions from mempool isn't supported now.
     class Blockchain < Peatio::Blockchain::Abstract
 
@@ -19,7 +20,7 @@ module Dogecoin
       def fetch_block!(block_number)
         block_hash = client.json_rpc(:getblockhash, [block_number])
 
-        client.json_rpc(:getblock, [block_hash, true])
+        client.json_rpc(:getblock, [block_hash, 2])
           .fetch('tx').each_with_object([]) do |tx, txs_array|
           txs = build_transaction(tx).map do |ntx|
             Peatio::Transaction.new(ntx.merge(block_number: block_number))
@@ -36,7 +37,7 @@ module Dogecoin
         raise Peatio::Blockchain::ClientError, e
       end
 
-      def load_balance_of_address!(address)
+      def load_balance_of_address!(address, _currency_id)
         address_with_balance = client.json_rpc(:listaddressgroupings)
                                  .flatten(1)
                                  .find { |addr| addr[0] == address }
@@ -53,7 +54,6 @@ module Dogecoin
       private
 
       def build_transaction(tx_hash)
-        tx_hash = client.json_rpc(:getrawtransaction, [tx_hash, 1])
         tx_hash.fetch('vout')
           .select do |entry|
           entry.fetch('value').to_d > 0 &&
@@ -82,4 +82,4 @@ module Dogecoin
       end
     end
   end
-
+end

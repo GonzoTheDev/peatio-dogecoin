@@ -1,37 +1,67 @@
-# peatio-dogecoin
-clone peatio
+# Peatio::Dogecoin
 
-go into the folder /lib/peatio
+Peatio dogecoin plugin for Rubykube stack
 
-create a folder named dogecoin
+## Installation
 
-upload the files blockchain.rb / client.rb / wallet.rb
+Add this line to your application's Gemfile:
 
-go in the folder /peatio/config/initializers
+```ruby
+gem 'peatio-dogecoin'
+```
 
-open the file blockchain_api.rb
+And then execute:
 
-and paste this      
+    $ bundle
 
-Peatio::Blockchain.registry[:dogecoin] = Dogecoin::Blockchain.new
+Or install it yourself as:
 
-save and exit
+    $ gem install peatio-dogecoin
 
-open the file wallet_api.rb in the same folder and paste this
+## Usage
 
-Peatio::Wallet.registry[:dogecoind] = Dogecoin::Wallet.new
+For Peatio Dogecoin plugin integration you need to do the following steps:
 
-save and exit
+### Image Build.
 
-now you have dogecoin ready to be added to tower
+1. Add peatio-dogecoin gem into your Gemfile.plugin
+```ruby
+gem 'peatio-dogecoin', '~> 0.2.0'
+```
 
-clone your new image of peatio
+2. Run `bundle install` for updating Gemfile.lock
 
-docker build -t peatio:custom image
+3. Build custom Peatio [docker image with Dogecoin plugin](https://github.com/rubykube/peatio/blob/master/docs/plugins.md#build)
 
-change peatio image in /opendax/config/app.yml
+4. Push your image using `docker push`
 
-rake render:config && rake service:app
+5. Update your deployment to use image with peatio-dogecoin gem
+
+### Peatio Configuration.
+
+1. Create Dogecoin Blockchain [config example](../config/blockchains.yml).
+    * No additional steps are needed
+
+2. Create Dogecoin Currency [config example](../config/currencies.yml).
+    * No additional steps are needed
+
+3. Create Dogecoin Wallets [config example](../config/wallets.yml)(deposit and hot wallets are required).
+    * No additional steps are needed
 
 
-thats all,tested and working for v2.3 and 2.4 of openware
+## Development
+
+Plugin development [example](https://github.com/rubykube/peatio/blob/master/docs/coins/development.md).
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/rubykube/peatio-dogecoin.
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Consulting
+
+You can contact Openware for finding certified vendors:
+[Openware.com](https://www.openware.com)
