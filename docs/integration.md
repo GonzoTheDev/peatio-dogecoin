@@ -4,9 +4,9 @@ For Peatio Dogecoin plugin integration you need to do the following steps:
 
 ## Image Build.
 
-1. Add peatio-dogecoin gem into your Gemfile.plugin
+1. Add peatio-dogecoin-gonzo gem into your Gemfile.plugin
 ```ruby
-gem 'peatio-dogecoin', '~> 0.1.0'
+gem 'peatio-dogecoin-gonzo', '~> 0.1.0'
 ```
 
 2. Run `bundle install` for updating Gemfile.lock
@@ -15,7 +15,7 @@ gem 'peatio-dogecoin', '~> 0.1.0'
 
 4. Push your image using `docker push`
 
-5. Update your deployment to use image with peatio-dogecoin gem
+5. Update your deployment to use image with peatio-dogecoin-gonzo gem
 
 ## Peatio Configuration.
 

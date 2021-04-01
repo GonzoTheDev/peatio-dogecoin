@@ -1,5 +1,5 @@
 module Peatio
   module Dogecoin
-    VERSION = "2.6.1".freeze
+    VERSION = "2.6.2".freeze
   end
 end
